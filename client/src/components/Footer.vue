@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>&copy; 2024 Fortune Teller</p>
+    <p>&copy; 2024 Dream Fortune</p>
   </footer>
 </template>
 
@@ -12,10 +12,10 @@ export default {
 
 <style scoped>
 footer {
-  background-color: #f8f9fa;
-  padding: 1rem;
+  background-color: #ca7ee9;
+  padding: 1rem 0;
   text-align: center;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #cecece;
   position: absolute;
   bottom: 0;
   width: 100%;

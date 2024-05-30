@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Fortune Teller</h1>
+    <h1><img src ="/luck_logo_wn.png"></h1>
     <nav>
       <router-link to="/">Home</router-link>
       <router-link to="/login">Login</router-link>
@@ -18,15 +18,20 @@ export default {
 
 <style scoped>
 header {
-  background-color: #f8f9fa;
-  padding: 1rem;
+  background-color: #8E44AD;
+  padding: 1rem 0;
   text-align: center;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #cecece;
+}
+
+header h1 {
+  margin: 0;
+  line-height: 1em;
 }
 
 nav a {
   margin: 0 1rem;
   text-decoration: none;
-  color: #007bff;
+  color: #ffffff;
 }
 </style>

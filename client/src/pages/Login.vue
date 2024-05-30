@@ -2,24 +2,40 @@
   <div class="login">
     <h2>Login</h2>
     <form @submit.prevent="login">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" />
-      </div>
-      <button type="submit">Login</button>
+      <custom-input
+        label="Username:"
+        type="text"
+        id="username"
+        v-model="username"
+        customClass="custom-input"
+      />
+      <custom-input
+        label="Password:"
+        type="password"
+        id="password"
+        v-model="password"
+        customClass="custom-input"
+      />
+      <custom-button
+        type="submit"
+        customClass="custom-button"
+      >  Login
+      </custom-button>
     </form>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import CustomInput from '@/components/share/CustomInput.vue'
+import CustomButton from '@/components/share/CustomButton.vue'
 
 export default {
   name: 'Login',
+  components: {
+    CustomInput,
+    CustomButton
+  },
   data() {
     return {
       username: '',
@@ -46,6 +62,8 @@ export default {
 <style scoped>
 .login {
   padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 form div {
