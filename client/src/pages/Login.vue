@@ -3,10 +3,10 @@
     <h2>Login</h2>
     <form @submit.prevent="login">
       <custom-input
-        label="Username:"
+        label="LoginId:"
         type="text"
-        id="username"
-        v-model="username"
+        id="loginId"
+        v-model="loginId"
         customClass="custom-input"
       />
       <custom-input
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import authApi from '@/api/auth';
 import CustomInput from '@/components/share/CustomInput.vue'
 import CustomButton from '@/components/share/CustomButton.vue'
 
@@ -38,15 +38,15 @@ export default {
   },
   data() {
     return {
-      username: '',
+      loginId: '',
       password: '',
     };
   },
   methods: {
     async login() {
       try {
-        const response = await axios.post('http://localhost:3000/auth/login', {
-          username: this.username,
+        const response = await authApi.loginUser({
+          loginId: this.loginId,
           password: this.password,
         });
         localStorage.setItem('token', response.data.token);
@@ -62,7 +62,7 @@ export default {
 <style scoped>
 .login {
   padding: 1rem;
-  max-width: 600px;
+  max-width: 480px;
   margin: 0 auto;
 }
 

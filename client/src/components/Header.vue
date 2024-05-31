@@ -1,8 +1,7 @@
 <template>
   <header>
-    <h1><img src ="/luck_logo_wn.png"></h1>
+    <h1><router-link to="/"><img src ="/luck_logo_wn.png"></router-link></h1>
     <nav>
-      <router-link to="/">Home</router-link>
       <router-link to="/login">Login</router-link>
       <router-link to="/register">Register</router-link>
       <router-link to="/mypage">My Page</router-link>

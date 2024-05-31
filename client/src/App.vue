@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view></router-view>
+    <div class="main-content">
+      <router-view></router-view>
+    </div>
     <Footer />
   </div>
 </template>
@@ -20,3 +22,10 @@ export default {
 </script>
 
 <style src="./styles/main.css"></style>
+<style scoped>
+.main-content {
+  flex-grow: 1;
+  padding-bottom: 4rem;
+  margin-bottom: 1rem;
+}
+</style>

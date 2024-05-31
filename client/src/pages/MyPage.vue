@@ -54,6 +54,8 @@ export default {
 <style scoped>
 .mypage {
   padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 button {
