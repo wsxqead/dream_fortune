@@ -16,21 +16,25 @@ export default {
 </script>
 
 <style scoped>
-header {
-  background-color: #8E44AD;
-  padding: 1rem 0;
-  text-align: center;
-  border-bottom: 1px solid #cecece;
-}
+  header {
+    background-color: #8E44AD;
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 1px solid #cecece;
+  }
 
-header h1 {
-  margin: 0;
-  line-height: 1em;
-}
+  header h1 {
+    margin: 0;
+    line-height: 1em;
+  }
 
-nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #ffffff;
-}
+  nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
 </style>
