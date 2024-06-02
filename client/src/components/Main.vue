@@ -3,6 +3,7 @@
     <MainSlide />
     <RecommendedFortunes />
     <FortuneCards />
+    <KeyServices />
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import MainSlide from '@/components/main/MainSlide.vue';
 import RecommendedFortunes from '@/components/main/RecommendedFortunes.vue'
 import FortuneCards from '@/components/main/FortuneCards.vue'
+import KeyServices from '@/components/main/KeyServices.vue'
 
 export default {
   name: 'Main',
   components: {
     MainSlide,
     RecommendedFortunes,
-    FortuneCards
+    FortuneCards,
+    KeyServices,
   }
 };
 </script>
