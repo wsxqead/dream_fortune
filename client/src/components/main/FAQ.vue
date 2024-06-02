@@ -70,4 +70,8 @@ export default {
     padding: 1rem;
     background-color: #fff;
   }
+  
+  @media screen and (max-width: 768px) {
+    
+  }
 </style>
