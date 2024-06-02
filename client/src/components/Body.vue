@@ -19,6 +19,7 @@
       <p>{{ compatibilityResult }}</p>
     </div>
   </div>
+
 </template>
 
 <script>
