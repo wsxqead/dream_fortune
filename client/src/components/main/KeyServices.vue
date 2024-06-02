@@ -17,18 +17,18 @@ export default {
 </script>
 
 <style scoped>
-.key-services {
-  padding: 1rem;
-  background-color: #e9ecef;
-  border-radius: 8px;
-}
+  .key-services {
+    padding: 1rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+  }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 
-li {
-  margin: 1rem 0;
-}
+  li {
+    margin: 1rem 0;
+  }
 </style>
