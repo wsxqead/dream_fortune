@@ -229,39 +229,45 @@ export default {
 </script>
 
 <style scoped>
-.register {
-  padding: 1rem;
-  max-width: 480px;
-  margin: 0 auto;
-}
+  .user-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-form div {
-  margin-bottom: 1rem;
-}
+  .register {
+    padding: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+  form div {
+    margin-bottom: 1rem;
+  }
 
-form input,
-form select {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 
-.birthdate {
-  display: flex;
-  justify-content: space-between;
-}
+  form input,
+  form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 
-.birthdate > div {
-  width: 30%;
-}
+  .birthdate {
+    display: flex;
+    justify-content: space-between;
+  }
 
-span {
-  color: red;
-  font-size: 0.875rem;
-}
+  .birthdate > div {
+    width: 30%;
+  }
+
+  span {
+    color: red;
+    font-size: 0.875rem;
+  }
 </style>

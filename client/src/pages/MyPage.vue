@@ -52,21 +52,27 @@ export default {
 </script>
 
 <style scoped>
-.mypage {
-  padding: 1rem;
-  max-width: 480px;
-  margin: 0 auto;
-}
+  .user-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
+  .mypage {
+    padding: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-button:hover {
-  background-color: #0056b3;
-}
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
 </style>

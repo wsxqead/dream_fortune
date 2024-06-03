@@ -1,27 +1,29 @@
 <template>
-  <div class="login">
-    <h2>Login</h2>
-    <form @submit.prevent="login">
-      <custom-input
-        label="LoginId:"
-        type="text"
-        id="loginId"
-        v-model="loginId"
-        customClass="custom-input"
-      />
-      <custom-input
-        label="Password:"
-        type="password"
-        id="password"
-        v-model="password"
-        customClass="custom-input"
-      />
-      <custom-button
-        type="submit"
-        customClass="custom-button"
-      >  Login
-      </custom-button>
-    </form>
+  <div class="user-content">
+    <div class="login">
+      <h2>Login</h2>
+      <form @submit.prevent="login">
+        <custom-input
+          label="LoginId:"
+          type="text"
+          id="loginId"
+          v-model="loginId"
+          customClass="custom-input"
+        />
+        <custom-input
+          label="Password:"
+          type="password"
+          id="password"
+          v-model="password"
+          customClass="custom-input"
+        />
+        <custom-button
+          type="submit"
+          customClass="custom-button"
+        >  Login
+        </custom-button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
         localStorage.setItem('token', response.data.token);
         this.$router.push('/mypage');
       } catch (error) {
-        alert('Invalid username or password');
+        alert('Invalid loginId or password');
       }
     },
   },
@@ -60,24 +62,30 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  padding: 1rem;
-  max-width: 480px;
-  margin: 0 auto;
-}
+  .user-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-form div {
-  margin-bottom: 1rem;
-}
+  .login {
+    padding: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+  form div {
+    margin-bottom: 1rem;
+  }
 
-form input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 </style>

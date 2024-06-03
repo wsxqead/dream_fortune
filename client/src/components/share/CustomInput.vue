@@ -49,13 +49,14 @@ export default {
 <style scoped>
   .custom-input {
     width: 100%;
-    padding: .5rem;
+    padding: 1.25rem;
     margin: .5rem 0;
     box-sizing: border-box;
     height: 2.5rem;
     border-radius: .5rem;
     border: 1px solid #dee2e6;
   }
+  
   .error-message {
     color: red;
     font-size: 0.875rem;
