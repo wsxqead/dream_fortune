@@ -45,6 +45,11 @@ export default {
     margin: 2rem 0;
   }
 
+  .testimonials .swiper {
+    width: 500px;
+  }
+  
+
   .testimonials h2 {
     text-align: center;
     margin-bottom: 1rem;

@@ -17,10 +17,25 @@ export default {
 </script>
 
 <style scoped>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .key-services {
-    padding: 1rem;
+    padding: 1rem 2rem;
     background-color: #e9ecef;
     border-radius: 8px;
+    animation: fadeInUp 0.5s ease-out;
+    max-width: 100%;
+    width: 1080px;
+    margin: 0 auto;
   }
 
   ul {
@@ -30,5 +45,26 @@ export default {
 
   li {
     margin: 1rem 0;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  li:hover {
+    transform: scale(1.05);
+    background-color: #f8f9fa;
+  }
+
+  li strong {
+    margin-right: 0.5rem;
+  }
+
+  .icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
   }
 </style>

@@ -29,7 +29,7 @@ export default {
     gap: 8px;
     flex-direction: column;
     display: flex;
-    aspect-ratio: 1456 / 728;
+    aspect-ratio: 1280 / 518;
     justify-content: center;
     align-items: center;
     margin: 0;
