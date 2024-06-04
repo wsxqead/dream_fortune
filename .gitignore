@@ -1,3 +1,5 @@
 client/.env
 server/.env
 client/package-lock.json
+server/src/db/connection.ts
+server/src/secret
