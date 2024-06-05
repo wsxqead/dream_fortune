@@ -3,13 +3,15 @@
     <h2>{{ character.name }}</h2>
     <img :src="character.image" :alt="character.name" />
     <p>{{ character.description }}</p>
-    <p>더 많은 정보와 {{ character.name }}의 운세를 확인하려면 여기를 클릭하세요.</p>
+    <p>
+      더 많은 정보와 {{ character.name }}의 운세를 확인하려면 여기를 클릭하세요.
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CharacterDetail',
+  name: "CharacterDetail",
   data() {
     return {
       character: null,
@@ -22,26 +24,57 @@ export default {
   methods: {
     getCharacterById(id) {
       const characters = [
-        { id: 1, name: '루나', image: require('@/assets/Luna.jpg'), description: '달을 상징하는 루나는 부드러운 성격과 깊은 통찰력을 가지고 있습니다. 항상 이른 아침부터 별들과 함께 오늘의 운세를 읽어옵니다.' },
-        { id: 2, name: '스텔라', image: require('@/assets/Stella.jpg'), description: '스텔라는 하늘을 나는 별을 상징하는 캐릭터입니다. 특별한 힘이 담긴 별들 사이에서 궁합을 읽어내어 사랑과 운명을 이끌어 냅니다.' },
-        { id: 3, name: '아리', image: require('@/assets/Ari.jpg'), description: '아리는 총명하고 활기찬 성격의 소유자입니다. 각종 띠별 운세를 읽어내어 모두가 행복하고 긍정적인 결과를 얻을 수 있도록 노력합니다.' },
-        { id: 4, name: '세리나', image: require('@/assets/Serena.jpg'), description: '세리나는 우주의 비밀을 알고 있는 것처럼 신비로운 존재입니다. 별자리와 우주의 흐름을 읽어내어 오늘의 운세를 예측합니다.' }
+        {
+          id: 1,
+          name: "루나",
+          image: require("@/assets/char/Luna.jpg"),
+          description:
+            "루나는 별과 달이 빛나는 마법의 숲에서 자랐습니다. 그녀는 밤하늘의 비밀을 읽는 능력을 가지고 있습니다.",
+        },
+        {
+          id: 2,
+          name: "스텔라",
+          image: require("@/assets/char/Stella.jpg"),
+          description:
+            "스텔라는 우주 탐험가 부모 밑에서 자라, 어린 시절부터 별과 행성에 대한 지식을 쌓아왔습니다.",
+        },
+        {
+          id: 3,
+          name: "아리",
+          image: require("@/assets/char/Ari.jpg"),
+          description:
+            "아리는 전통적인 마을에서 자랐으며, 띠별 운세와 관련된 풍습과 전통을 배웠습니다.",
+        },
+        {
+          id: 4,
+          name: "세리나",
+          image: require("@/assets/char/Serena.jpg"),
+          description:
+            "세리나는 심리학자를 부모로 두고 자라, 어릴 때부터 다양한 심리 테스트와 사람들의 마음을 이해하는 법을 배웠습니다.",
+        },
+        {
+          id: 5,
+          name: "릴리안",
+          image: require("@/assets/char/Lillian.jpg"),
+          description:
+            "릴리안은 마법의 정원에서 태어나고 자랐으며, 탄생석과 탄생화의 비밀을 알고 있습니다.",
+        },
       ];
-      return characters.find(character => character.id === parseInt(id));
+      return characters.find((character) => character.id === parseInt(id));
     },
   },
 };
 </script>
 
 <style scoped>
-  .character-detail {
-    padding: 2rem;
-    text-align: center;
-  }
+.character-detail {
+  padding: 2rem;
+  text-align: center;
+}
 
-  .character-detail img {
-    width: 200px;
-    border-radius: 50%;
-    margin: 1rem auto;
-  }
+.character-detail img {
+  width: 200px;
+  border-radius: 50%;
+  margin: 1rem auto;
+}
 </style>
