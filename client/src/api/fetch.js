@@ -13,7 +13,7 @@ function getCookie(name) {
 }
 
 const fetch = axios.create({
-  baseURL: process.env.API_URL || "http://localhost:4040",
+  baseURL: process.env.VUE_APP_API_URL  || "http://localhost:4040",
   withCredentials: true,
 });
 

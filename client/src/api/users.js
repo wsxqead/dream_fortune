@@ -13,3 +13,10 @@ export default {
     return fetch.post(`/users`, userData);
   },
 };
+
+export async function fetchProfile() {
+  const resp = await fetch.get(`/users/profile`).catch((error) => {
+    console.log(error);
+  });
+  return resp?.data;
+}

@@ -2,7 +2,7 @@
   <div class="user-content">
     <div class="login">
       <h2>Login</h2>
-      <form @submit.prevent="login">
+      <form @submit.prevent="handleLogin">
         <custom-input
           label="LoginId:"
           type="text"
@@ -17,10 +17,8 @@
           v-model="password"
           customClass="custom-input"
         />
-        <custom-button
-          type="submit"
-          customClass="custom-button"
-        >  Login
+        <custom-button type="submit" customClass="custom-button">
+          Login
         </custom-button>
       </form>
     </div>
@@ -28,64 +26,62 @@
 </template>
 
 <script>
-import authApi from '@/api/auth';
-import CustomInput from '@/components/share/CustomInput.vue'
-import CustomButton from '@/components/share/CustomButton.vue'
+import { mapActions } from "vuex";
+import CustomInput from "@/components/share/CustomInput.vue";
+import CustomButton from "@/components/share/CustomButton.vue";
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
     CustomInput,
-    CustomButton
+    CustomButton,
   },
   data() {
     return {
-      loginId: '',
-      password: '',
+      loginId: "",
+      password: "",
     };
   },
   methods: {
-    async login() {
-      try {
-        const response = await authApi.loginUser({
-          loginId: this.loginId,
-          password: this.password,
-        });
-        localStorage.setItem('token', response.data.token);
-        this.$router.push('/mypage');
-      } catch (error) {
-        alert('Invalid loginId or password');
-      }
+    ...mapActions("auth", ["login"]),
+    async handleLogin() {
+      await this.login({ loginId: this.loginId, password: this.password });
+      // try {
+      //   await this.login({ loginId: this.loginId, password: this.password })
+      //   // this.$router.push("/mypage");
+      // } catch (error) {
+      //   alert("Invalid loginId or password");
+      // }
     },
   },
 };
 </script>
 
 <style scoped>
-  .user-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.user-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .login {
-    padding: 1rem;
-    max-width: 480px;
-    margin: 0 auto;
-  }
+.login {
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
 
-  form div {
-    margin-bottom: 1rem;
-  }
+form div {
+  margin-bottom: 1rem;
+}
 
-  form label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
 
-  form input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 </style>
