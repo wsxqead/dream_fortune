@@ -3,16 +3,7 @@
     <h2>Register</h2>
     <div @submit.prevent="register">
       <LoginIdInput />
-      
-      <custom-input
-        label="Nickname"
-        type="text"
-        id="nickname"
-        v-model="nickname"
-        :error="nicknameError"
-        @validate="validateNickname"
-      />
-      <button type="button" @click="checkNickname">Check Nickname</button>
+      <NicknameInput />
 
       <custom-input
         label="Password"
@@ -90,6 +81,7 @@ import CustomInput from "@/components/share/CustomInput.vue";
 import CustomButton from "@/components/share/CustomButton.vue";
 import CustomSelect from "@/components/share/CustomSelect.vue";
 import LoginIdInput from "@/components/share/LoginIdInput.vue";
+import NicknameInput from "@/components/share/NicknameInput.vue";
 
 export default {
   name: "Register",
@@ -98,6 +90,7 @@ export default {
     CustomButton,
     CustomSelect,
     LoginIdInput,
+    NicknameInput,
   },
   data() {
     return {
