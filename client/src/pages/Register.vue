@@ -1,16 +1,9 @@
 <template>
   <div class="register">
     <h2>Register</h2>
-    <form @submit.prevent="register">
-      <custom-input
-        label="LoginId"
-        type="text"
-        id="loginId"
-        v-model="loginId"
-        :error="loginIdError"
-        @validate="validateLoginId"
-      />
-      <button type="button" @click="checkLoginId">Check LoginId</button>
+    <div @submit.prevent="register">
+      <LoginIdInput />
+      
       <custom-input
         label="Nickname"
         type="text"
@@ -20,7 +13,7 @@
         @validate="validateNickname"
       />
       <button type="button" @click="checkNickname">Check Nickname</button>
-      
+
       <custom-input
         label="Password"
         type="password"
@@ -38,7 +31,7 @@
         @validate="validateConfirmPassword"
       />
 
-     <div class="birthdate">
+      <div class="birthdate">
         <custom-input
           label="Year"
           type="text"
@@ -84,49 +77,49 @@
         </label>
       </div>
 
-      <custom-button
-        type="submit"
-        :disabled="!termsAgreed || !privacyAgreed"
-      > Register
+      <custom-button type="submit" :disabled="!termsAgreed || !privacyAgreed">
+        Register
       </custom-button>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
-import userApi from '@/api/users';
-import CustomInput from '@/components/share/CustomInput.vue'
-import CustomButton from '@/components/share/CustomButton.vue'
-import CustomSelect from '@/components/share/CustomSelect.vue';
+import userApi from "@/api/users";
+import CustomInput from "@/components/share/CustomInput.vue";
+import CustomButton from "@/components/share/CustomButton.vue";
+import CustomSelect from "@/components/share/CustomSelect.vue";
+import LoginIdInput from "@/components/share/LoginIdInput.vue";
 
 export default {
-  name: 'Register',
+  name: "Register",
   components: {
     CustomInput,
     CustomButton,
-    CustomSelect
+    CustomSelect,
+    LoginIdInput,
   },
   data() {
     return {
-      loginId: '',
-      nickname: '',
-      password: '',
-      confirmPassword: '',
-      birthYear: '',
-      birthMonth: '',
-      birthDay: '',
-      gender: 'male',
+      loginId: "",
+      nickname: "",
+      password: "",
+      confirmPassword: "",
+      birthYear: "",
+      birthMonth: "",
+      birthDay: "",
+      gender: "male",
       termsAgreed: false,
       privacyAgreed: false,
-      loginIdError: '',
-      nicknameError: '',
-      passwordError: '',
-      confirmPasswordError: '',
-      birthYearError: '',
-      birthMonthError: '',
-      birthDayError: '',
+      loginIdError: "",
+      nicknameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+      birthYearError: "",
+      birthMonthError: "",
+      birthDayError: "",
       availableMonths: [],
-      availableDays: []
+      availableDays: [],
     };
   },
   watch: {
@@ -135,19 +128,24 @@ export default {
     },
     birthMonth() {
       this.updateAvailableDays();
-    }
+    },
   },
   methods: {
     validateLoginId() {
-      this.loginIdError = this.loginId.length < 3 ? 'LoginId must be at least 3 characters long' : '';
+      this.loginIdError =
+        this.loginId.length < 3
+          ? "LoginId must be at least 3 characters long"
+          : "";
     },
     async checkLoginId() {
       if (this.loginId) {
         try {
           const response = await userApi.checkLoginId(this.loginId);
-          this.loginIdError = response.data.exists ? 'LoginId already taken' : '';
+          this.loginIdError = response.data.exists
+            ? "LoginId already taken"
+            : "";
         } catch (error) {
-          console.error('Error checking loginId', error);
+          console.error("Error checking loginId", error);
         }
       }
     },
@@ -155,18 +153,23 @@ export default {
       if (this.nickname) {
         try {
           const response = await userApi.checkNickname(this.nickname);
-          this.nicknameError = response.data.exists ? 'Nickname already taken' : '';
+          this.nicknameError = response.data.exists
+            ? "Nickname already taken"
+            : "";
         } catch (error) {
-          console.error('Error checking nickname', error);
+          console.error("Error checking nickname", error);
         }
       }
     },
     validatePassword() {
       const passwordRules = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
-      this.passwordError = !passwordRules.test(this.password) ? 'Password must be at least 8 characters long and include uppercase, lowercase, and a number' : '';
+      this.passwordError = !passwordRules.test(this.password)
+        ? "Password must be at least 8 characters long and include uppercase, lowercase, and a number"
+        : "";
     },
     validateConfirmPassword() {
-      this.confirmPasswordError = this.password !== this.confirmPassword ? 'Passwords do not match' : '';
+      this.confirmPasswordError =
+        this.password !== this.confirmPassword ? "Passwords do not match" : "";
     },
     updateBirthdate() {
       this.validateBirthYear();
@@ -174,21 +177,25 @@ export default {
     },
     validateBirthYear() {
       const year = parseInt(this.birthYear, 10);
-      this.birthYearError = isNaN(year) || year < 1900 || year > new Date().getFullYear() ? 'Enter a valid year' : '';
+      this.birthYearError =
+        isNaN(year) || year < 1900 || year > new Date().getFullYear()
+          ? "Enter a valid year"
+          : "";
     },
     validateBirthMonth() {
-      this.birthMonthError = this.birthMonth === '' ? 'Select a month' : '';
-    },validateBirthDay() {
-      this.birthDayError = this.birthDay === '' ? 'Select a day' : '';
+      this.birthMonthError = this.birthMonth === "" ? "Select a month" : "";
+    },
+    validateBirthDay() {
+      this.birthDayError = this.birthDay === "" ? "Select a day" : "";
     },
     updateAvailableMonths() {
       if (this.birthYear) {
         this.availableMonths = Array.from({ length: 12 }, (_, i) => i + 1);
       } else {
         this.availableMonths = [];
-        this.birthMonth = '';
+        this.birthMonth = "";
         this.availableDays = [];
-        this.birthDay = '';
+        this.birthDay = "";
       }
     },
     updateAvailableDays() {
@@ -196,10 +203,13 @@ export default {
         const year = parseInt(this.birthYear, 10);
         const month = parseInt(this.birthMonth, 10);
         const daysInMonth = new Date(year, month, 0).getDate();
-        this.availableDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+        this.availableDays = Array.from(
+          { length: daysInMonth },
+          (_, i) => i + 1
+        );
       } else {
         this.availableDays = [];
-        this.birthDay = '';
+        this.birthDay = "";
       }
     },
     async register() {
@@ -208,7 +218,7 @@ export default {
       if (this.passwordError || this.confirmPasswordError) {
         return;
       }
-        try {
+      try {
         await userApi.register({
           loginId: this.loginId,
           nickname: this.nickname,
@@ -218,56 +228,55 @@ export default {
           termsAgreed: this.termsAgreed,
           privacyAgreed: this.privacyAgreed,
         });
-        this.$router.push('/login');
+        this.$router.push("/login");
       } catch (error) {
-        console.error('Error registering user', error);
+        console.error("Error registering user", error);
       }
-      
     },
   },
 };
 </script>
 
 <style scoped>
-  .user-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.user-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .register {
-    padding: 1rem;
-    max-width: 480px;
-    margin: 0 auto;
-  }
+.register {
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
 
-  form div {
-    margin-bottom: 1rem;
-  }
+form div {
+  margin-bottom: 1rem;
+}
 
-  form label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
 
-  form input,
-  form select {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
+form input,
+form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 
-  .birthdate {
-    display: flex;
-    justify-content: space-between;
-  }
+.birthdate {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .birthdate > div {
-    width: 30%;
-  }
+.birthdate > div {
+  width: 30%;
+}
 
-  span {
-    color: red;
-    font-size: 0.875rem;
-  }
+span {
+  color: red;
+  font-size: 0.875rem;
+}
 </style>
