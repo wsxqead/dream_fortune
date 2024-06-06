@@ -2,13 +2,13 @@ import * as authApi from "@/api/auth";
 import { fetchProfile } from "@/api/users";
 
 const state = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: localStorage.getItem("user") || null,
 };
 
 const mutations = {
   SET_USER(state, user) {
     state.user = user;
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", user);
   },
   CLEAR_USER(state) {
     state.user = null;
@@ -18,7 +18,6 @@ const mutations = {
 
 const actions = {
   async login({ commit }, credentials) {
-    console.log("credentials", credentials);
     try {
       const response = await authApi.signIn(credentials);
       if (response && response.message === "로그인 성공") {

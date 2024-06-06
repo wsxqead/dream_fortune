@@ -17,13 +17,30 @@
 <script>
 export default {
   name: "Header",
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    user() {
-      return this.$store.getters.user;
-    },
+  data() {
+    return {
+      isLoggedIn: false,
+      user: null,
+    };
+  },
+  created() {
+    // 스토어의 상태를 초기화합니다.
+    this.isLoggedIn = this.$store.getters.isLoggedIn;
+    this.user = this.$store.getters.user;
+
+    // 스토어의 상태가 변경될 때마다 데이터를 업데이트합니다.
+    this.$store.watch(
+      () => this.$store.getters.isLoggedIn,
+      (isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn;
+      }
+    );
+    this.$store.watch(
+      () => this.$store.getters.user,
+      (user) => {
+        this.user = user;
+      }
+    );
   },
 };
 </script>
