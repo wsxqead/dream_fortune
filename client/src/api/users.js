@@ -1,15 +1,15 @@
-import axios from 'axios';
+import fetch from "./fetch";
 
 export default {
   checkLoginId(loginId) {
-    return axios.get(`${process.env.API_URL}/users/check-loginId`, { params: { loginId } });
+    return fetch.get(`/users/check-loginId`, { params: { loginId } });
   },
 
   checkNickname(nickname) {
-    return axios.get(`${process.env.API_URL}/users/check-nickname`, { params: { nickname } });
+    return fetch.get(`/users/check-nickname`, { params: { nickname } });
   },
 
   register(userData) {
-    return axios.post(`${process.env.API_URL}/users/register`, userData);
+    return fetch.post(`/users/register`, userData);
   },
 };
