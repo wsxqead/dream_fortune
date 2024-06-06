@@ -140,6 +140,8 @@ export default {
   display: flex;
   flex-direction: row;
   border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .user-select {
@@ -150,5 +152,6 @@ export default {
   border-radius: 4px;
   flex: 1;
   color: #000;
+  height: 2.5rem;
 }
 </style>

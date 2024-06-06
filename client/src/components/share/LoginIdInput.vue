@@ -120,7 +120,7 @@ export default {
   top: 3rem;
   border: 0;
   font-weight: bold;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .err_msg {
