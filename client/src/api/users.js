@@ -10,6 +10,6 @@ export default {
   },
 
   register(userData) {
-    return fetch.post(`/users/register`, userData);
+    return fetch.post(`/users`, userData);
   },
 };

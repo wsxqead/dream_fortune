@@ -6,148 +6,72 @@
       <NicknameInput />
       <PasswordInput />
       <BirthDateInput />
-      <div>
-        <label for="gender">Gender:</label>
-        <select id="gender" v-model="gender">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div>
-        <label>
-          <input type="checkbox" v-model="termsAgreed" />
-          Agree to Terms and Conditions
-        </label>
-      </div>
+      <GenderSelect />
+      <AgreeWrap />
 
-      <div>
-        <label>
-          <input type="checkbox" v-model="privacyAgreed" />
-          Agree to Privacy Policy
-        </label>
-      </div>
-
-      <custom-button type="submit" :disabled="!termsAgreed || !privacyAgreed">
+      <custom-button @click="register" :disabled="!isFormValid">
         Register
       </custom-button>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import useSignUpStore from "@/hooks/useSignUpStore";
 import userApi from "@/api/users";
 import CustomButton from "@/components/share/CustomButton.vue";
 import LoginIdInput from "@/components/share/LoginIdInput.vue";
 import NicknameInput from "@/components/share/NicknameInput.vue";
 import PasswordInput from "@/components/share/PasswordInput.vue";
 import BirthDateInput from "@/components/share/BirthDateInput.vue";
+import GenderSelect from "@/components/share/GenderSelect.vue";
+import AgreeWrap from "@/components/share/AgreeWrap.vue";
 
-export default {
-  name: "Register",
-  components: {
-    CustomButton,
-    LoginIdInput,
-    NicknameInput,
-    PasswordInput,
-    BirthDateInput,
-  },
-  data() {
-    return {
-      loginId: "",
-      nickname: "",
-      password: "",
-      confirmPassword: "",
-      birthYear: "",
-      birthMonth: "",
-      birthDay: "",
-      gender: "male",
-      termsAgreed: false,
-      privacyAgreed: false,
-      loginIdError: "",
-      nicknameError: "",
-      passwordError: "",
-      confirmPasswordError: "",
-      birthYearError: "",
-      birthMonthError: "",
-      birthDayError: "",
-      availableMonths: [],
-      availableDays: [],
-    };
-  },
-  methods: {
-    validatePassword() {
-      const passwordRules = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
-      this.passwordError = !passwordRules.test(this.password)
-        ? "Password must be at least 8 characters long and include uppercase, lowercase, and a number"
-        : "";
-    },
-    validateConfirmPassword() {
-      this.confirmPasswordError =
-        this.password !== this.confirmPassword ? "Passwords do not match" : "";
-    },
-    updateBirthdate() {
-      this.validateBirthYear();
-      this.validateBirthMonth();
-    },
-    validateBirthYear() {
-      const year = parseInt(this.birthYear, 10);
-      this.birthYearError =
-        isNaN(year) || year < 1900 || year > new Date().getFullYear()
-          ? "Enter a valid year"
-          : "";
-    },
-    validateBirthMonth() {
-      this.birthMonthError = this.birthMonth === "" ? "Select a month" : "";
-    },
-    validateBirthDay() {
-      this.birthDayError = this.birthDay === "" ? "Select a day" : "";
-    },
-    updateAvailableMonths() {
-      if (this.birthYear) {
-        this.availableMonths = Array.from({ length: 12 }, (_, i) => i + 1);
-      } else {
-        this.availableMonths = [];
-        this.birthMonth = "";
-        this.availableDays = [];
-        this.birthDay = "";
-      }
-    },
-    updateAvailableDays() {
-      if (this.birthYear && this.birthMonth) {
-        const year = parseInt(this.birthYear, 10);
-        const month = parseInt(this.birthMonth, 10);
-        const daysInMonth = new Date(year, month, 0).getDate();
-        this.availableDays = Array.from(
-          { length: daysInMonth },
-          (_, i) => i + 1
-        );
-      } else {
-        this.availableDays = [];
-        this.birthDay = "";
-      }
-    },
-    async register() {
-      this.validateConfirmPassword();
+const router = useRouter();
+const {
+  loginId,
+  nickname,
+  password,
+  birthDate,
+  gender,
+  isAgreedTerms,
+  isAgreedPolicy,
+  loginIdValid,
+  nicknameValid,
+  passwordValid,
+  birthDateValid,
+} = useSignUpStore();
 
-      if (this.passwordError || this.confirmPasswordError) {
-        return;
-      }
-      try {
-        await userApi.register({
-          loginId: this.loginId,
-          nickname: this.nickname,
-          password: this.password,
-          birthdate: `${this.birthYear}-${this.birthMonth}-${this.birthDay}`,
-          gender: this.gender,
-          termsAgreed: this.termsAgreed,
-          privacyAgreed: this.privacyAgreed,
-        });
-        this.$router.push("/login");
-      } catch (error) {
-        console.error("Error registering user", error);
-      }
-    },
-  },
+const isFormValid = computed(
+  () =>
+    loginIdValid.value &&
+    nicknameValid.value &&
+    passwordValid.value &&
+    birthDateValid.value &&
+    isAgreedTerms.value &&
+    isAgreedPolicy.value
+);
+
+const register = async () => {
+  if (!isFormValid.value) {
+    alert("모든 값을 입력해주세요.");
+    return;
+  }
+
+  try {
+    await userApi.register({
+      loginId: loginId.value,
+      nickname: nickname.value,
+      password: password.value,
+      birthDate: birthDate.value,
+      gender: gender.value,
+    });
+    router.push("/");
+  } catch (error) {
+    console.error("Error registering user", error);
+  }
 };
 </script>
 
