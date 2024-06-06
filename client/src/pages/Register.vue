@@ -5,32 +5,7 @@
       <LoginIdInput />
       <NicknameInput />
       <PasswordInput />
-
-      <div class="birthdate">
-        <custom-input
-          label="Year"
-          type="text"
-          id="birthYear"
-          v-model="birthYear"
-          :error="birthYearError"
-          @input="updateBirthdate"
-        />
-        <custom-select
-          label="Month"
-          id="birthMonth"
-          :options="availableMonths"
-          v-model="birthMonth"
-          :error="birthMonthError"
-          @input="updateBirthdate"
-        />
-        <custom-select
-          label="Day"
-          id="birthDay"
-          :options="availableDays"
-          v-model="birthDay"
-          :error="birthDayError"
-        />
-      </div>
+      <BirthDateInput />
       <div>
         <label for="gender">Gender:</label>
         <select id="gender" v-model="gender">
@@ -61,22 +36,20 @@
 
 <script>
 import userApi from "@/api/users";
-import CustomInput from "@/components/share/CustomInput.vue";
 import CustomButton from "@/components/share/CustomButton.vue";
-import CustomSelect from "@/components/share/CustomSelect.vue";
 import LoginIdInput from "@/components/share/LoginIdInput.vue";
 import NicknameInput from "@/components/share/NicknameInput.vue";
 import PasswordInput from "@/components/share/PasswordInput.vue";
+import BirthDateInput from "@/components/share/BirthDateInput.vue";
 
 export default {
   name: "Register",
   components: {
-    CustomInput,
     CustomButton,
-    CustomSelect,
     LoginIdInput,
     NicknameInput,
     PasswordInput,
+    BirthDateInput,
   },
   data() {
     return {
