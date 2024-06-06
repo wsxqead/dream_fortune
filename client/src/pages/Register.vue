@@ -4,23 +4,7 @@
     <div @submit.prevent="register">
       <LoginIdInput />
       <NicknameInput />
-
-      <custom-input
-        label="Password"
-        type="password"
-        id="password"
-        v-model="password"
-        :error="passwordError"
-        @validate="validatePassword"
-      />
-      <custom-input
-        label="Confirm Password"
-        type="password"
-        id="confirmPassword"
-        v-model="confirmPassword"
-        :error="confirmPasswordError"
-        @validate="validateConfirmPassword"
-      />
+      <PasswordInput />
 
       <div class="birthdate">
         <custom-input
@@ -82,6 +66,7 @@ import CustomButton from "@/components/share/CustomButton.vue";
 import CustomSelect from "@/components/share/CustomSelect.vue";
 import LoginIdInput from "@/components/share/LoginIdInput.vue";
 import NicknameInput from "@/components/share/NicknameInput.vue";
+import PasswordInput from "@/components/share/PasswordInput.vue";
 
 export default {
   name: "Register",
@@ -91,6 +76,7 @@ export default {
     CustomSelect,
     LoginIdInput,
     NicknameInput,
+    PasswordInput,
   },
   data() {
     return {
@@ -115,45 +101,7 @@ export default {
       availableDays: [],
     };
   },
-  watch: {
-    birthYear() {
-      this.updateAvailableMonths();
-    },
-    birthMonth() {
-      this.updateAvailableDays();
-    },
-  },
   methods: {
-    validateLoginId() {
-      this.loginIdError =
-        this.loginId.length < 3
-          ? "LoginId must be at least 3 characters long"
-          : "";
-    },
-    async checkLoginId() {
-      if (this.loginId) {
-        try {
-          const response = await userApi.checkLoginId(this.loginId);
-          this.loginIdError = response.data.exists
-            ? "LoginId already taken"
-            : "";
-        } catch (error) {
-          console.error("Error checking loginId", error);
-        }
-      }
-    },
-    async checkNickname() {
-      if (this.nickname) {
-        try {
-          const response = await userApi.checkNickname(this.nickname);
-          this.nicknameError = response.data.exists
-            ? "Nickname already taken"
-            : "";
-        } catch (error) {
-          console.error("Error checking nickname", error);
-        }
-      }
-    },
     validatePassword() {
       const passwordRules = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
       this.passwordError = !passwordRules.test(this.password)
