@@ -22,7 +22,7 @@ const actions = {
       const response = await authApi.signIn(credentials);
       if (response && response.message === "로그인 성공") {
         const response2 = await fetchProfile();
-        commit("SET_USER", response2.data);
+        commit("SET_USER", response2);
       }
     } catch (error) {
       commit("CLEAR_USER");
@@ -35,7 +35,7 @@ const actions = {
   async checkAuth({ commit }) {
     try {
       const response = await fetchProfile();
-      commit("SET_USER", response.data.user);
+      commit("SET_USER", response);
     } catch (error) {
       commit("CLEAR_USER");
     }

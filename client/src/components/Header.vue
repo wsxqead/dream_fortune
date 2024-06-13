@@ -4,10 +4,10 @@
       <router-link to="/"><img src="/luck_logo_wn.png" /></router-link>
     </h1>
     <nav>
-      <router-link v-if="isLoggedIn" to="/mypage">{{
-        user.loginId
-      }}</router-link>
-      <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
+      <router-link v-if="isLoggedIn" to="/mypage"
+        >{{ user.loginId }}{{ console.log("user", user) }}</router-link
+      >
+      <router-link v-if="isLoggedIn" to="/">Logout</router-link>
       <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
       <router-link v-if="!isLoggedIn" to="/register">Register</router-link>
     </nav>
@@ -17,30 +17,13 @@
 <script>
 export default {
   name: "Header",
-  data() {
-    return {
-      isLoggedIn: false,
-      user: null,
-    };
-  },
-  created() {
-    // 스토어의 상태를 초기화합니다.
-    this.isLoggedIn = this.$store.getters.isLoggedIn;
-    this.user = this.$store.getters.user;
-
-    // 스토어의 상태가 변경될 때마다 데이터를 업데이트합니다.
-    this.$store.watch(
-      () => this.$store.getters.isLoggedIn,
-      (isLoggedIn) => {
-        this.isLoggedIn = isLoggedIn;
-      }
-    );
-    this.$store.watch(
-      () => this.$store.getters.user,
-      (user) => {
-        this.user = user;
-      }
-    );
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+    user() {
+      return this.$store.getters["auth/user"];
+    },
   },
 };
 </script>
